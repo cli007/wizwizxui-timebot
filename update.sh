@@ -111,7 +111,7 @@ do
 			echo "Folder created successfully!"
 			
 			 cd /var/www/html/
-			 wget -O wizwizpanel.zip https://github.com/cli007/wizwizxui-timebot/archive/refs/tags/wizwizpanel.zip
+			 wget -O wizwizpanel.zip https://github.com/cli007/wizwizxui-timebot/archive/refs/tags/wizwizpanel2.zip
 			
 			 file_to_transfer="/var/www/html/wizwizpanel.zip"
 			 destination_dir=$(find /var/www/html -type d -name "*${RANDOM_CODE}*" -print -quit)
