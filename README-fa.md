@@ -83,7 +83,7 @@ bash <(curl -s https://raw.githubusercontent.com/cli007/wizwizxui-timebot/main/w
 
 
 ```
-bash <(curl -s https://raw.githubusercontent.com/wizwizdev/wizwizxui-timebot/main/update.sh)
+bash <(curl -s https://raw.githubusercontent.com/cli007/wizwizxui-timebot/main/update.sh)
 ```
 
 <br>
