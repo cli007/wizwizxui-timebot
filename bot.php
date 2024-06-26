@@ -650,7 +650,7 @@ if($data=="inviteFriends"){
             $res = sendPhoto($inviteText['file_id'],$txt,null,"HTML");
         }
         $msgId = $res->result->message_id;
-        sendMessage("با لینک بالا دوستاتو به ربات دعوت کن و با هر خرید $inviteAmount بدست بیار",json_encode(['inline_keyboard'=>[[['text'=>$buttonValues['back_to_main'],'callback_data'=>"mainMenu"]]]]),null,null,$msgId);
+        sendMessage("با لینک بالا دوستاتو به ربات دعوت کن و با هر خرید $inviteAmount کسب کنید.",json_encode(['inline_keyboard'=>[[['text'=>$buttonValues['back_to_main'],'callback_data'=>"mainMenu"]]]]),null,null,$msgId);
     }
     else alert("این قسمت غیر فعال است");
 }
@@ -732,7 +732,7 @@ if(preg_match('/^tranfserUserAmount(\d+)/',$userInfo['step'],$match) && $text !=
 }
 if($data=="increaseMyWallet"){
     delMessage();
-    sendMessage("🙂 عزیزم مقدار شارژ مورد نظر خود را به تومان وارد کن (بیشتر از 5000 تومان)",$cancelKey);
+    sendMessage("✨مقدار شارژ مورد نظر خود را به تومان وارد کنید (بیشتر از 5000 تومان)",$cancelKey);
     setUser($data);
 }
 if($userInfo['step'] == "increaseMyWallet" && $text != $buttonValues['cancel']){
@@ -741,7 +741,7 @@ if($userInfo['step'] == "increaseMyWallet" && $text != $buttonValues['cancel']){
         exit();
     }
     elseif($text < 5000){
-        sendMessage("لطفا مقداری بیشتر از 5000 وارد کن");
+        sendMessage("لطفا مقداری بیشتر از 5000 تومان وارد کنید");
         exit();
     }
     sendMessage("🪄 لطفا صبور باشید ...",$removeKeyboard);
@@ -1127,7 +1127,7 @@ if(preg_match('/^createAccDate(\d+)/',$userInfo['step'],$match) && $text != $but
             sendMessage("عدد باید بیشتر از 0 باشه");
         }
     }else{
-        sendMessage('😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟');
+        sendMessage('لطفا فقط عدد ارسال کنید!');
     }
 }
 if(preg_match('/^createAccVolume(\d+)_(\d+)/',$userInfo['step'],$match) && $text != $buttonValues['cancel'] && ($from_id == $admin || $userInfo['isAdmin'] == true)){
@@ -1281,15 +1281,15 @@ if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) &
         }
         
         if(is_null($response)){
-            sendMessage('❌ | 🥺 گلم ، اتصال به سرور برقرار نیست لطفا مدیر رو در جریان بزار ...');
+            sendMessage('❌ اتصال به سرور برقرار نیست! لطفا با پشتیبانی در ارتباط باشید.');
             break;
         }
     	if($response == "inbound not Found"){
-            sendMessage("❌ | 🥺 سطر (inbound) با آیدی $inbound_id تو این سرور وجود نداره ، مدیر رو در جریان بزار ...");
+            sendMessage("❌ سطر (inbound) با آیدی $inbound_id در این سرور پیدا نشد! در صورت تمایل موضوع را به پشتیبانی اطلاع دهید.");
             break;
     	}
     	if(!$response->success){
-            sendMessage('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+            sendMessage('❌ خطای ناشناخته! لطفا به پشتیبانی پیام دهید.');
             sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
             break;
         }
@@ -1712,15 +1712,15 @@ if(preg_match('/havePaiedWeSwap(.*)/',$data,$match)) {
         }
         
         if(is_null($response)){
-            sendMessage('❌ | 🥺 گلم ، اتصال به سرور برقرار نیست لطفا مدیر رو در جریان بزار ...');
+            sendMessage('❌ اتصال به سرور برقرار نیست! لطفا با پشتیبانی در ارتباط باشید.');
             exit;
         }
         if($response == "inbound not Found"){
-            sendMessage("❌ | 🥺 سطر (inbound) با آیدی $inbound_id تو این سرور وجود نداره ، مدیر رو در جریان بزار ...");
+            sendMessage("❌ سطر (inbound) با آیدی $inbound_id در این سرور پیدا نشد! در صورت تمایل موضوع را به پشتیبانی اطلاع دهید.");
         	exit;
         }
         if(!$response->success){
-            sendMessage('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+            sendMessage('❌ خطای ناشناخته! لطفا به پشتیبانی پیام دهید.');
             sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
             exit;
         }
@@ -1967,7 +1967,7 @@ sendMessage("
 
     exit;
 }else {
-    alert("به دلیل مشکل فنی امکان افزایش حجم نیست. لطفا به مدیریت اطلاع بدید یا 5دقیقه دیگر دوباره تست کنید", true);
+    alert("به دلیل مشکل فنی امکان افزایش حجم نیست. لطفا به مدیریت اطلاع بدید یا 5 دقیقه دیگر دوباره تست کنید", true);
     exit;
 }
 }
@@ -2107,7 +2107,7 @@ elseif($payType == "RENEW_SCONFIG"){
         $stmt->close();
         alert("شما هزینه کمتری پرداخت کردید، لطفا به پشتیبانی پیام بدهید");
     }else{
-        alert("پرداخت مورد نظر هنوز تکمیل نشده!");
+        alert("پرداخت مورد نظر هنوز تکمیل نشده است!");
     }
 }
 }else alert("این لینک پرداخت منقضی شده است");
@@ -2576,7 +2576,7 @@ if((preg_match('/^discountCustomPlanDay(\d+)/',$userInfo['step'], $match) || pre
     if($botState['walletState'] == "on") $keyboard[] = [['text' => $buttonValues['pay_with_wallet'],  'callback_data' => "payCustomWithWallet$hash_id"]];
     if($botState['tronWallet'] == "on") $keyboard[] = [['text' => $buttonValues['tron_gateway'],  'callback_data' => "payWithTronWallet" . $hash_id]];
 
-    if(!preg_match('/^discountCustomPlanDay/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 نکنه کد تخفیف داری؟ ",  'callback_data' => "haveDiscountCustom_" . $rowId]];
+    if(!preg_match('/^discountCustomPlanDay/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 ثبت کد تخفیف ",  'callback_data' => "haveDiscountCustom_" . $rowId]];
 	$keyboard[] = [['text' => $buttonValues['cancel'], 'callback_data' => "mainMenu"]];
     $price = ($price == 0) ? 'رایگان' : number_format($price).' تومان ';
     sendMessage(str_replace(['VOLUME', 'DAYS', 'PLAN-NAME', 'PRICE', 'DESCRIPTION'], [$volume, $days, $name, $price, $desc], $mainValues['buy_subscription_detail']),json_encode(['inline_keyboard'=>$keyboard]), "HTML");
@@ -2591,7 +2591,7 @@ if(preg_match('/^haveDiscount(.+?)_(.*)/',$data,$match)){
 }
 if($data=="getTestAccount"){
     if($userInfo['freetrial'] != null && $from_id != $admin && $userInfo['isAdmin'] != true){
-        alert("شما اکانت تست را قبلا استفاده کرده اید");
+        alert("شما قبلا اکانت تست را دریافت کردید. 👣");
         exit();
     }
     $stmt = $connection->prepare("SELECT * FROM `server_plans` WHERE `price`=0");
@@ -2799,7 +2799,7 @@ if((preg_match('/^discountSelectPlan(\d+)_(\d+)_(\d+)/',$userInfo['step'],$match
         if($botState['walletState'] == "on") $keyboard[] = [['text' => $buttonValues['pay_with_wallet'],  'callback_data' => "payWithWallet$hash_id"]];
         if($botState['tronWallet'] == "on") $keyboard[] = [['text' => $buttonValues['tron_gateway'],  'callback_data' => "payWithTronWallet" . $hash_id]];
         
-        if(!preg_match('/^discountSelectPlan/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 نکنه کد تخفیف داری؟ ",  'callback_data' => "haveDiscountSelectPlan_" . $match[1] . "_" . $match[2] . "_" . $rowId]];
+        if(!preg_match('/^discountSelectPlan/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 ثبت کد تخفیف ",  'callback_data' => "haveDiscountSelectPlan_" . $match[1] . "_" . $match[2] . "_" . $rowId]];
 
     }
 	$keyboard[] = [['text' => $buttonValues['back_to_main'], 'callback_data' => "selectCategory{$call_id}_{$sid}"]];
@@ -2940,15 +2940,15 @@ if(preg_match('/payCustomWithWallet(.*)/',$data, $match)){
     }
     
     if(is_null($response)){
-        alert('❌ | 🥺 گلم ، اتصال به سرور برقرار نیست لطفا مدیر رو در جریان بزار ...');
+        alert('❌ اتصال به سرور برقرار نیست! لطفا با پشتیبانی در ارتباط باشید.');
         exit;
     }
 	if($response == "inbound not Found"){
-        alert("❌ | 🥺 سطر (inbound) با آیدی $inbound_id تو این سرور وجود نداره ، مدیر رو در جریان بزار ...");
+        alert("❌ سطر (inbound) با آیدی $inbound_id در این سرور پیدا نشد! در صورت تمایل موضوع را به پشتیبانی اطلاع دهید.");
 		exit;
 	}
 	if(!$response->success){
-        alert('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+        alert('❌ خطای ناشناخته! لطفا به پشتیبانی پیام دهید.');
         sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
         exit;
     }
@@ -3349,15 +3349,15 @@ if(preg_match('/accCustom(.*)/',$data, $match) and $text != $buttonValues['cance
     }
     
     if(is_null($response)){
-        alert('❌ | 🥺 گلم ، اتصال به سرور برقرار نیست لطفا مدیر رو در جریان بزار ...');
+        alert('❌ اتصال به سرور برقرار نیست! لطفا با پشتیبانی در ارتباط باشید.');
         exit;
     }
 	if($response == "inbound not Found"){
-        alert("❌ | 🥺 سطر (inbound) با آیدی $inbound_id تو این سرور وجود نداره ، مدیر رو در جریان بزار ...");
+        alert("❌ سطر (inbound) با آیدی $inbound_id در این سرور پیدا نشد! در صورت تمایل موضوع را به پشتیبانی اطلاع دهید.");
 		exit;
 	}
 	if(!$response->success){
-        alert('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+        alert('❌ خطای ناشناخته! لطفا به پشتیبانی پیام دهید.');
         sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
         exit;
     }
@@ -3672,15 +3672,15 @@ if(preg_match('/payWithWallet(.*)/',$data, $match)){
                 } 
             }
             if(is_null($response)){
-                sendMessage('❌ | 🥺 گلم ، اتصال به سرور برقرار نیست لطفا مدیر رو در جریان بزار ...');
+                sendMessage('❌ اتصال به سرور برقرار نیست! لطفا با پشتیبانی در ارتباط باشید.');
                 exit;
             }
         	if($response == "inbound not Found"){
-                sendMessage("❌ | 🥺 سطر (inbound) با آیدی $inbound_id تو این سرور وجود نداره ، مدیر رو در جریان بزار ...");
+                sendMessage("❌ سطر (inbound) با آیدی $inbound_id در این سرور پیدا نشد! در صورت تمایل موضوع را به پشتیبانی اطلاع دهید.");
         		exit;
         	}
         	if(!$response->success){
-                sendMessage('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+                sendMessage('❌ خطای ناشناخته! لطفا به پشتیبانی پیام دهید.');
                 sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
                 exit;
             }
@@ -4202,15 +4202,15 @@ if(preg_match('/accept(.*)/',$data, $match) and $text != $buttonValues['cancel']
                 } 
             }
             if(is_null($response)){
-                sendMessage('❌ | 🥺 گلم ، اتصال به سرور برقرار نیست لطفا مدیر رو در جریان بزار ...');
+                sendMessage('❌ اتصال به سرور برقرار نیست! لطفا با پشتیبانی در ارتباط باشید.');
                 exit;
             }
         	if($response == "inbound not Found"){
-                sendMessage("❌ | 🥺 سطر (inbound) با آیدی $inbound_id تو این سرور وجود نداره ، مدیر رو در جریان بزار ...");
+                sendMessage("❌ سطر (inbound) با آیدی $inbound_id در این سرور پیدا نشد! در صورت تمایل موضوع را به پشتیبانی اطلاع دهید.");
         		exit;
         	}
         	if(!$response->success){
-                sendMessage('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+                sendMessage('❌ خطای ناشناخته! لطفا به پشتیبانی پیام دهید.');
                 sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
                 exit;
             }
@@ -5666,15 +5666,15 @@ if(preg_match('/freeTrial(\d+)/',$data,$match)) {
         }
     }
     if(is_null($response)){
-        alert('❌ | 🥺 گلم ، اتصال به سرور برقرار نیست لطفا مدیر رو در جریان بزار ...');
+        alert('❌ اتصال به سرور برقرار نیست! لطفا با پشتیبانی در ارتباط باشید.');
         exit;
     }
 	if($response == "inbound not Found"){
-        alert("❌ | 🥺 سطر (inbound) با آیدی $inbound_id تو این سرور وجود نداره ، مدیر رو در جریان بزار ...");
+        alert("❌ سطر (inbound) با آیدی $inbound_id در این سرور پیدا نشد! در صورت تمایل موضوع را به پشتیبانی اطلاع دهید.");
 		exit;
 	}
 	if(!$response->success){
-        alert('❌ | 😮 وای خطا داد لطفا سریع به مدیر بگو ...');
+        alert('❌ خطای ناشناخته! لطفا به پشتیبانی پیام دهید.');
         sendMessage("خطای سرور {$serverInfo['title']}:\n\n" . ($response->msg), null, null, $admin);
         exit;
     }
@@ -7710,7 +7710,7 @@ if(preg_match('/^discountRenew(\d+)_(\d+)/',$userInfo['step'], $match) || preg_m
     if($botState['walletState'] == "on") $keyboard[] = [['text' => "پرداخت با موجودی مبلغ $price",  'callback_data' => "payRenewWithWallet$hash_id"]];
     if($botState['tronWallet'] == "on") $keyboard[] = [['text' => $buttonValues['tron_gateway'],  'callback_data' => "payWithTronWallet" . $hash_id]];
 
-    if(!preg_match('/^discountRenew/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 نکنه کد تخفیف داری؟ ",  'callback_data' => "haveDiscountRenew_" . $match[1] . "_" . $rowId]];
+    if(!preg_match('/^discountRenew/', $userInfo['step'])) $keyboard[] = [['text' => " 🎁 ثبت کد تخفیف ",  'callback_data' => "haveDiscountRenew_" . $match[1] . "_" . $rowId]];
 
     $keyboard[] = [['text'=>$buttonValues['cancel'], 'callback_data'=> "mainMenu"]];
 
@@ -10068,7 +10068,7 @@ if($data == "managePanel" and (($from_id == $admin || $userInfo['isAdmin'] == tr
     
     setUser();
     $msg = "
-👤 عزیزم به بخش مدیریت خوشومدی
+👤 به بخش مدیریت خوشومدی
 
 🚪 /start
 ";
