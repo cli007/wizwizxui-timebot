@@ -732,7 +732,10 @@ if(preg_match('/^tranfserUserAmount(\d+)/',$userInfo['step'],$match) && $text !=
 }
 if($data=="increaseMyWallet"){
     delMessage();
-    sendMessage("✨مقدار شارژ مورد نظر خود را به تومان وارد کنید (بیشتر از 5000 تومان)",$cancelKey);
+    sendMessage("
+    ✨ مقدار شارژ مورد نظر خود را به تومان وارد کنید (بیشتر از 5000 تومان)
+💰 موجودی کیف پول: <code> $myWallet </code>
+    ",$cancelKey);
     setUser($data);
 }
 if($userInfo['step'] == "increaseMyWallet" && $text != $buttonValues['cancel']){
